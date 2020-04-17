@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/speed-profiler/static/css/main.42cc8b22.chunk.css",
+    "main.js": "/speed-profiler/static/js/main.688d305a.chunk.js",
+    "main.js.map": "/speed-profiler/static/js/main.688d305a.chunk.js.map",
+    "runtime-main.js": "/speed-profiler/static/js/runtime-main.e5ec7c02.js",
+    "runtime-main.js.map": "/speed-profiler/static/js/runtime-main.e5ec7c02.js.map",
+    "static/js/2.83895cf7.chunk.js": "/speed-profiler/static/js/2.83895cf7.chunk.js",
+    "static/js/2.83895cf7.chunk.js.map": "/speed-profiler/static/js/2.83895cf7.chunk.js.map",
+    "index.html": "/speed-profiler/index.html",
+    "precache-manifest.952c474890dee30d6e291987f08731dc.js": "/speed-profiler/precache-manifest.952c474890dee30d6e291987f08731dc.js",
+    "service-worker.js": "/speed-profiler/service-worker.js",
+    "static/css/main.42cc8b22.chunk.css.map": "/speed-profiler/static/css/main.42cc8b22.chunk.css.map",
+    "static/js/2.83895cf7.chunk.js.LICENSE.txt": "/speed-profiler/static/js/2.83895cf7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e5ec7c02.js",
+    "static/js/2.83895cf7.chunk.js",
+    "static/css/main.42cc8b22.chunk.css",
+    "static/js/main.688d305a.chunk.js"
+  ]
+}
