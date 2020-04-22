@@ -1,22 +1,20 @@
 import { CompositeLayer } from '@deck.gl/core'
-import { LineLayer } from '@deck.gl/layers'
+import { GeoJsonLayer } from '@deck.gl/layers'
+import SpeedProfilerAdapter from './Adapter'
 
 class SpeedProfiler extends CompositeLayer {
   renderLayers() {
-    const layer = new LineLayer({
-      id: 'line-layer',
-      data: this.props.data,
+    const data = SpeedProfilerAdapter.routeToLineLayerData(this.props.data)
+
+    const layer = new GeoJsonLayer({
+      id: 'geojson-layer',
+      data,
       pickable: true,
-      getWidth: 50,
+      getWidth: 10,
       getSourcePosition: (d) => d.from.coordinates,
       getTargetPosition: (d) => d.to.coordinates,
-      getColor: (d) => [Math.sqrt(d.inbound + d.outbound), 140, 0],
-      onHover: ({ object, x, y }) => {
-        const tooltip = `${object.from.name} to ${object.to.name}`
-        /* Update tooltip
-           http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
-        */
-      },
+      getLineColor: (d) => [0, 0, 0, 255],
+      getLineWidth: 5,
     })
     return layer
   }

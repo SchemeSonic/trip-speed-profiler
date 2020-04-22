@@ -1,7 +1,10 @@
 import React from 'react'
 import DeckGL from '@deck.gl/react'
+import { MapView } from '@deck.gl/core'
 import { StaticMap } from 'react-map-gl'
 import SpeedProfiler from './SpeedProfiler/SpeedProfiler'
+import Utils from './SpeedProfiler/Utils'
+import MockGenerator from './SpeedProfiler/MockGenerator'
 
 //import { ExampleComponent } from 'speed-profiler'
 //import 'speed-profiler/dist/index.css'
@@ -12,32 +15,39 @@ const MAPBOX_ACCESS_TOKEN =
 
 // Initial viewport settings
 const initialViewState = {
-  longitude: -122.269029,
-  latitude: 37.80787,
+  longitude: 32.50737,
+  latitude: 37.848529,
   zoom: 13,
   pitch: 50,
-  bearing: 50,
+  bearing: 0,
 }
 
 const App = () => {
-  const data = [
-    {
-      inbound: 72633,
-      outbound: 74735,
-      from: {
-        name: '19th St. Oakland (19TH)',
-        coordinates: [-122.269029, 37.80787],
-      },
-      to: {
-        name: '12th St. Oakland City Center (12TH)',
-        coordinates: [-122.271604, 37.803664],
-      },
-    },
-  ]
+  const data = MockGenerator.generateRoute()
   return (
-    <DeckGL initialViewState={initialViewState} controller={true}>
-      <SpeedProfiler data={data} />
-      <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
+    <DeckGL initialViewState={initialViewState}>
+      <MapView id='map' width='100%' controller={true}>
+        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
+      </MapView>
+      <SpeedProfiler
+        data={data}
+        onHover={({ shape, x, y }) => {
+          debugger
+          const content =
+            shape && shape.properties
+              ? `${shape.properties.atus} - ${shape.properties.ulid}`
+              : ''
+          Utils.setTooltip('sp-tooltip', content, x, y)
+
+          /* Update tooltip
+           http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
+        */
+        }}
+      />
+      <div
+        id='sp-tooltip'
+        style={{ position: 'absolute', display: 'none' }}
+      ></div>
     </DeckGL>
   )
 }
